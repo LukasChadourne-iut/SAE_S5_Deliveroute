@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Détail d’un colis : position de chargement, client destinataire, pièces emballées -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="16dp">
+
+            <!-- En-tête du colis -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvIdColisDetail"
+                        style="@style/Texte.GrandTitre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="COL-038" />
+
+                    <TextView
+                        android:id="@+id/tvPoidsColisDetail"
+                        style="@style/Texte.Secondaire"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="680 kg · 3 pièces" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvPositionChargement"
+                    style="@style/Badge"
+                    android:backgroundTint="@color/vert_fonce"
+                    android:textColor="@color/citron"
+                    tools:text="Position 1 · bas" />
+            </LinearLayout>
+
+            <!-- Client destinataire -->
+            <TextView
+                style="@style/Texte.Section"
+                android:text="@string/client" />
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Carte"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/tvInitialesClient"
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:background="@drawable/bg_pastille"
+                            android:backgroundTint="@color/vert_tres_clair"
+                            android:gravity="center"
+                            android:textColor="@color/vert_texte"
+                            android:textStyle="bold"
+                            tools:text="AM" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvNomClient"
+                                style="@style/Texte.Gras"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:text="Atelier Mécaflex" />
+
+                            <TextView
+                                android:id="@+id/tvContactClient"
+                                style="@style/Texte.Secondaire"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:text="Julie Meyer" />
+                        </LinearLayout>
+
+                        <ImageButton
+                            android:id="@+id/btnAppelerClient"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:background="@drawable/bg_pastille"
+                            android:backgroundTint="@color/vert_tres_clair"
+                            android:contentDescription="@string/cd_appeler"
+                            android:padding="10dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_telephone"
+                            app:tint="@color/vert_texte" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="12dp"
+                        android:background="@color/gris_bordure" />
+
+                    <TextView
+                        android:id="@+id/tvAdresseClient"
+                        style="@style/Texte"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:gravity="center_vertical"
+                        app:drawableStartCompat="@drawable/ic_lieu"
+                        app:drawableTint="@color/vert_texte"
+                        tools:text="4 rue de la Paix, 67300 Schiltigheim" />
+
+                    <TextView
+                        android:id="@+id/tvTelephoneClient"
+                        style="@style/Texte"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:drawablePadding="8dp"
+                        android:gravity="center_vertical"
+                        app:drawableStartCompat="@drawable/ic_telephone"
+                        app:drawableTint="@color/vert_texte"
+                        tools:text="03 88 33 12 40" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Pièces contenues dans le colis -->
+            <TextView
+                style="@style/Texte.Section"
+                android:text="@string/pieces_emballees" />
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Carte"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvPieces"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_piece" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnVoirCarte"
+                style="@style/Bouton.Secondaire"
+                android:layout_width="match_parent"
+                android:layout_marginTop="16dp"
+                android:text="@string/btn_voir_carte"
+                app:icon="@drawable/ic_carte" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <include layout="@layout/view_etat_chargement" />
+
+</FrameLayout>

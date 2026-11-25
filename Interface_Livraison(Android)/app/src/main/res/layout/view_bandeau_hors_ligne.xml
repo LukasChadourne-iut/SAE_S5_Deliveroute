@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Bandeau affiché quand la connexion est perdue (annexe 2.3, remarque 3).
+     Visible tant que ConnectivityManager signale l’absence de réseau.
+     tvOperationsEnAttente : nombre d’opérations stockées localement (bons, ordre des points)
+     qui seront rejouées au retour de la connexion. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bandeauHorsLigne"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/bg_pastille"
+    android:backgroundTint="@color/orange_clair"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingHorizontal="12dp"
+    android:paddingVertical="10dp"
+    android:visibility="gone"
+    tools:visibility="visible">
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_hors_ligne"
+        app:tint="@color/orange_texte" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/Texte.Gras"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hors_ligne_titre"
+            android:textColor="@color/orange_texte"
+            android:textSize="13sp" />
+
+        <TextView
+            style="@style/Texte.Secondaire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hors_ligne_message"
+            android:textColor="@color/orange_texte" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvOperationsEnAttente"
+        style="@style/Badge"
+        android:backgroundTint="@color/blanc"
+        android:textColor="@color/orange_texte"
+        tools:text="2 en attente" />
+</LinearLayout>

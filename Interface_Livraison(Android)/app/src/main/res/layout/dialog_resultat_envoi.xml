@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Contenu de la boîte de dialogue affichée après l’envoi d’un bon de livraison
+     (annexe 2.3, précision 6) : à utiliser avec MaterialAlertDialogBuilder.setView(...).
+     Succès  : ic_coche, vert_statut / vert_statut_fond, envoi_ok_titre / envoi_ok_message,
+               btnReessayerEnvoi masqué.
+     Échec   : ic_hors_ligne (pas de réseau) ou ic_alerte (serveur indisponible / autre),
+               orange_texte / orange_clair, message envoi_echec_* selon l’erreur Volley
+               (NoConnectionError, ServerError / TimeoutError, autre), btnReessayerEnvoi visible. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <ImageView
+        android:id="@+id/ivResultatEnvoi"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/bg_cercle"
+        android:backgroundTint="@color/vert_statut_fond"
+        android:importantForAccessibility="no"
+        android:padding="14dp"
+        android:src="@drawable/ic_coche"
+        app:tint="@color/vert_statut" />
+
+    <TextView
+        android:id="@+id/tvTitreResultatEnvoi"
+        style="@style/Texte.Titre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:gravity="center"
+        android:text="@string/envoi_ok_titre" />
+
+    <TextView
+        android:id="@+id/tvNumeroBonResultat"
+        style="@style/Texte.Gras"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/vert_texte"
+        tools:text="BL-2026-0842" />
+
+    <TextView
+        android:id="@+id/tvMessageResultatEnvoi"
+        style="@style/Texte.Secondaire"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/envoi_ok_message"
+        android:textSize="13sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnOkResultatEnvoi"
+        style="@style/Bouton.Principal"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:text="@string/btn_ok" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnReessayerEnvoi"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/btn_reessayer_envoi"
+        android:textColor="@color/vert_texte"
+        android:visibility="gone"
+        tools:visibility="visible" />
+</LinearLayout>

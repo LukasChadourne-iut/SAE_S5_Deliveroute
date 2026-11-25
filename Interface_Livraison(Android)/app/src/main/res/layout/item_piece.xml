@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Une pièce emballée dans un colis (clic : bottom_sheet_piece) -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:minHeight="58dp"
+    android:paddingHorizontal="14dp"
+    android:paddingVertical="8dp">
+
+    <ImageView
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:background="@drawable/bg_pastille"
+        android:backgroundTint="@color/gris_statut_fond"
+        android:importantForAccessibility="no"
+        android:padding="7dp"
+        android:src="@drawable/ic_boite"
+        app:tint="@color/vert_texte" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvNumeroPiece"
+            style="@style/Texte.Gras"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="P-881" />
+
+        <TextView
+            android:id="@+id/tvPoidsPiece"
+            style="@style/Texte.Secondaire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="240 kg · CMD-2481" />
+    </LinearLayout>
+
+    <!-- État : à faire / en cours de fabrication / fabriquée / livrée -->
+    <TextView
+        android:id="@+id/tvEtatPiece"
+        style="@style/Badge"
+        android:backgroundTint="@color/vert_statut_fond"
+        android:textColor="@color/vert_statut"
+        tools:text="Fabriquée" />
+</LinearLayout>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Une ligne de la liste des colis (clic : fragment_detail_colis).
+     separateurColis : séparateur sous la ligne (maquette .mobile-package), à masquer (GONE)
+     pour le dernier élément de la liste. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ligneColis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:minHeight="64dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:id="@+id/tvOrdreColis"
+            style="@style/Numero"
+            tools:text="1" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvIdColis"
+                style="@style/Texte.Gras"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="COL-038" />
+
+            <TextView
+                android:id="@+id/tvClientColis"
+                style="@style/Texte.Secondaire"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Atelier Mécaflex" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvPoidsColis"
+                style="@style/Texte.Gras"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="680 kg" />
+
+            <TextView
+                android:id="@+id/tvNbPieces"
+                style="@style/Texte.Secondaire"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="3 pièces" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="8dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_chevron"
+            app:tint="@color/gris_icone" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/separateurColis"
+        style="@style/Separateur" />
+</LinearLayout>

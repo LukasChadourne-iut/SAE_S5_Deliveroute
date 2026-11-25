@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Carte foncée « Tournée en cours » (incluse dans fragment_tournee, téléphone et tablette) -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/carteResumeTournee"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_carte_tournee"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tvEnCours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_pastille"
+            android:backgroundTint="@color/vert_pastille"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:text="@string/tournee_en_cours"
+            android:textColor="@color/citron"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_point"
+            app:drawableTint="@color/citron" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/btnOptionsTournee"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/cd_options"
+            android:src="@drawable/ic_plus_options"
+            app:tint="@color/options_tournee" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvNomTournee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/blanc"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:text="Tournée #124" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/tvNbArrets"
+            style="@style/Texte.Resume"
+            app:drawableStartCompat="@drawable/ic_lieu"
+            tools:text="4 arrêts" />
+
+        <TextView
+            android:id="@+id/tvDistance"
+            style="@style/Texte.Resume"
+            app:drawableStartCompat="@drawable/ic_route"
+            tools:text="86 km" />
+
+        <TextView
+            android:id="@+id/tvDuree"
+            style="@style/Texte.Resume"
+            app:drawableStartCompat="@drawable/ic_horloge"
+            tools:text="3 h 20" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp">
+
+        <TextView
+            android:id="@+id/tvProgression"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/texte_clair"
+            android:textSize="13sp"
+            tools:text="1 livraison sur 4" />
+
+        <TextView
+            android:id="@+id/tvPourcentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/citron"
+            android:textStyle="bold"
+            tools:text="25%" />
+    </LinearLayout>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progressTournee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        app:indicatorColor="@color/citron"
+        app:trackColor="@color/piste_progression"
+        app:trackCornerRadius="2dp"
+        app:trackThickness="4dp"
+        tools:progress="25" />
+</LinearLayout>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Un arrêt de la boucle de livraison (onglet Itinéraire), d’après la maquette .stop.
+     À venir (défaut) : tvNumeroArret fond bg_arret_a_venir, texte arret_texte.
+     Prochain arrêt   : tvNumeroArret fond bg_arret_prochain, texte arret_prochain ;
+                        carteArret strokeColor bordure_active ; tvProchainArret visible.
+     Arrêt livré      : tvNumeroArret fond bg_arret_livre, texte vide + ivCocheArret visible ;
+                        tvHeureArret = « Livrée · 08:28 », couleur arret_livre_texte.
+     Dernier arrêt    : traitArret en GONE. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <!-- Piste verticale : numéro + trait vers l’arrêt suivant -->
+    <LinearLayout
+        android:layout_width="32dp"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="28dp"
+            android:layout_height="28dp">
+
+            <TextView
+                android:id="@+id/tvNumeroArret"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_arret_a_venir"
+                android:gravity="center"
+                android:textColor="@color/arret_texte"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="2" />
+
+            <ImageView
+                android:id="@+id/ivCocheArret"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_coche"
+                android:visibility="gone"
+                app:tint="@color/blanc" />
+        </FrameLayout>
+
+        <fr.tgv.livraison.ui.view.TraitPointilleView
+            android:id="@+id/traitArret"
+            android:layout_width="4dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvHeureArret"
+            style="@style/Texte.Secondaire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            tools:text="09:05" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/carteArret"
+            style="@style/Carte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="12dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvEntreprise"
+                            style="@style/Texte.Gras"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="Nord Technique" />
+
+                        <TextView
+                            android:id="@+id/tvAdresseArret"
+                            style="@style/Texte.Secondaire"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:drawablePadding="4dp"
+                            android:gravity="center_vertical"
+                            app:drawableStartCompat="@drawable/ic_lieu"
+                            app:drawableTint="@color/gris_icone"
+                            tools:text="12 rue du Port, Brumath" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_chevron"
+                        app:tint="@color/gris_icone" />
+                </LinearLayout>
+
+                <View style="@style/Separateur" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/gris_fond_carte"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="8dp">
+
+                    <TextView
+                        android:id="@+id/tvColisArret"
+                        style="@style/Texte.Secondaire"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawablePadding="6dp"
+                        android:gravity="center_vertical"
+                        app:drawableStartCompat="@drawable/ic_colis"
+                        app:drawableTint="@color/gris_icone"
+                        tools:text="1 colis · 185 kg" />
+
+                    <TextView
+                        android:id="@+id/tvProchainArret"
+                        style="@style/Badge"
+                        android:backgroundTint="@color/vert_statut_fond"
+                        android:text="@string/prochain_arret"
+                        android:textColor="@color/vert_statut"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</LinearLayout>

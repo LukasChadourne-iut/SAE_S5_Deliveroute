@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Écran « Plus » : profil chauffeur, préférences, assistance, déconnexion.
+     Chaque option (maquette .mobile-settings button) : icône sur fond arrondi, titre en gras,
+     sous-titre gris, chevron ; séparateurs entre les lignes d’une même carte.
+     Synchronisation : point synchro_ok à la place du chevron (orange_texte s’il reste
+     des opérations en attente, cf. view_bandeau_hors_ligne). -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="16dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/carteProfil"
+            style="@style/Carte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/tvAvatarProfil"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/bg_cercle"
+                    android:backgroundTint="@color/avatar_fond"
+                    android:gravity="center"
+                    android:textColor="@color/avatar_texte"
+                    android:textStyle="bold"
+                    tools:text="TM" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvNomChauffeur"
+                        style="@style/Texte.Gras"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="Thomas Muller" />
+
+                    <TextView
+                        android:id="@+id/tvVehicule"
+                        style="@style/Texte.Secondaire"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="Chauffeur · Camion TGV-01" />
+                </LinearLayout>
+
+                <ImageView style="@style/OptionChevron" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ===== Préférences ===== -->
+        <TextView
+            style="@style/Texte.Section"
+            android:text="@string/preferences" />
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Carte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/optCarte"
+                    style="@style/LigneOption">
+
+                    <ImageView
+                        style="@style/OptionIcone"
+                        android:src="@drawable/ic_carte" />
+
+                    <LinearLayout style="@style/OptionTextes">
+
+                        <TextView
+                            style="@style/Texte.Gras"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/opt_carte_titre" />
+
+                        <TextView
+                            style="@style/Texte.Secondaire"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/opt_carte_desc" />
+                    </LinearLayout>
+
+                    <ImageView style="@style/OptionChevron" />
+                </LinearLayout>
+
+                <View style="@style/Separateur" />
+
+                <LinearLayout
+                    android:id="@+id/optHistorique"
+                    style="@style/LigneOption">
+
+                    <ImageView
+                        style="@style/OptionIcone"
+                        android:src="@drawable/ic_horloge" />
+
+                    <LinearLayout style="@style/OptionTextes">
+
+                        <TextView
+                            style="@style/Texte.Gras"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/opt_historique_titre" />
+
+                        <TextView
+                            android:id="@+id/tvHistoriqueDesc"
+                            style="@style/Texte.Secondaire"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/opt_historique_desc"
+                            tools:text="12 tournées terminées" />
+                    </LinearLayout>
+
+                    <ImageView style="@style/OptionChevron" />
+                </LinearLayout>
+
+                <View style="@style/Separateur" />
+
+                <LinearLayout
+                    android:id="@+id/optSynchro"
+                    style="@style/LigneOption">
+
+                    <ImageView
+                        style="@style/OptionIcone"
+                        android:src="@drawable/ic_parametres" />
+
+                    <LinearLayout style="@style/OptionTextes">
+
+                        <TextView
+                            style="@style/Texte.Gras"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/opt_synchro_titre" />
+
+                        <TextView
+                            android:id="@+id/tvSynchroDesc"
+                            style="@style/Texte.Secondaire"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/opt_synchro_desc" />
+                    </LinearLayout>
+
+                    <!-- Point d’état de la synchronisation (maquette .sync-dot) -->
+                    <View
+                        android:id="@+id/pointSynchro"
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/bg_cercle"
+                        android:backgroundTint="@color/synchro_ok" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ===== Assistance ===== -->
+        <TextView
+            style="@style/Texte.Section"
+            android:text="@string/assistance" />
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Carte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/optGuide"
+                    style="@style/LigneOption">
+
+                    <ImageView
+                        style="@style/OptionIcone"
+                        android:src="@drawable/ic_document" />
+
+                    <LinearLayout style="@style/OptionTextes">
+
+                        <TextView
+                            style="@style/Texte.Gras"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/opt_guide_titre" />
+
+                        <TextView
+                            style="@style/Texte.Secondaire"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/opt_guide_desc" />
+                    </LinearLayout>
+
+                    <ImageView style="@style/OptionChevron" />
+                </LinearLayout>
+
+                <View style="@style/Separateur" />
+
+                <LinearLayout
+                    android:id="@+id/optContact"
+                    style="@style/LigneOption">
+
+                    <ImageView
+                        style="@style/OptionIcone"
+                        android:src="@drawable/ic_telephone" />
+
+                    <LinearLayout style="@style/OptionTextes">
+
+                        <TextView
+                            style="@style/Texte.Gras"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/opt_contact_titre" />
+
+                        <TextView
+                            style="@style/Texte.Secondaire"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/opt_contact_desc" />
+                    </LinearLayout>
+
+                    <ImageView style="@style/OptionChevron" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Déconnexion du livreur : retour à activity_connexion -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Carte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <LinearLayout
+                android:id="@+id/optDeconnexion"
+                style="@style/LigneOption">
+
+                <ImageView
+                    style="@style/OptionIcone"
+                    android:backgroundTint="@color/rouge_fond"
+                    android:src="@drawable/ic_deconnexion"
+                    app:tint="@color/rouge_erreur" />
+
+                <TextView
+                    style="@style/Texte.Gras"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_weight="1"
+                    android:text="@string/opt_deconnexion"
+                    android:textColor="@color/rouge_erreur" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            style="@style/Texte.Secondaire"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/version" />
+    </LinearLayout>
+</ScrollView>

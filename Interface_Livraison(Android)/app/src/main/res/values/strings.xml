@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">T.G.V Livraison</string>
+    <string name="nom_entreprise">T.G.V</string>
+    <string name="nom_entreprise_complet">Tournée Générale Véloce</string>
+
+    <!-- Descriptions d’accessibilité -->
+    <string name="cd_logo">Logo T.G.V</string>
+    <string name="cd_retour">Retour</string>
+    <string name="cd_options">Options</string>
+    <string name="cd_profil">Profil du chauffeur</string>
+    <string name="cd_deplacer">Déplacer l’arrêt</string>
+    <string name="cd_carte">Carte de la tournée</string>
+    <string name="cd_appeler">Appeler le client</string>
+
+    <!-- Navigation -->
+    <string name="nav_tournee">Tournée</string>
+    <string name="nav_colis">Colis</string>
+    <string name="nav_bons">Bons</string>
+    <string name="nav_plus">Plus</string>
+
+    <!-- Tournée -->
+    <string name="tournee_en_cours">Tournée en cours</string>
+    <string name="onglet_itineraire">Itinéraire</string>
+    <string name="onglet_chargement">Chargement</string>
+    <string name="chargement_titre">Ordre de chargement</string>
+    <string name="chargement_aide">Du bas vers le haut : les colis les plus lourds d’abord.</string>
+    <string name="trajet_optimise">Trajet optimisé</string>
+    <string name="prochain_arret">Prochain arrêt</string>
+    <string name="btn_saisir_boucle">Saisir la boucle</string>
+    <!-- L’application n’est pas un GPS (annexe 2.3 §4) : elle affiche la position, sans guidage -->
+    <string name="btn_navigation">Démarrer la tournée</string>
+    <string name="btn_terminer_tournee">Terminer la tournée</string>
+    <string name="cd_ma_position">Centrer la carte sur ma position</string>
+    <string name="suivi_position">Position en temps réel</string>
+
+    <!-- Retour à l’atelier (annexe 2.3 §4 et §5) -->
+    <string name="retour_atelier">Retour à l’atelier</string>
+    <string name="retour_atelier_detail">Déchargement des colis non livrés</string>
+    <string name="retour_atelier_fin">Fin de la boucle de livraison</string>
+
+    <!-- Fin de tournée : ordre des points + retour atelier communiqués à l’atelier -->
+    <string name="fin_tournee_titre">Terminer la tournée</string>
+    <string name="fin_tournee_sous_titre">Le récapitulatif est envoyé à l’atelier : ordre des points de livraison, retour à l’atelier et bons de livraison.</string>
+    <string name="fin_colis_livres">Livrés</string>
+    <string name="fin_colis_non_livres">Non livrés</string>
+    <string name="fin_bons_en_attente">Bons en attente</string>
+    <string name="fin_bons_attente_aide">Des bons n’ont pas encore pu être envoyés. Ils seront transmis automatiquement dès le retour de la connexion.</string>
+    <string name="ordre_points">Ordre des points de livraison</string>
+    <string name="btn_confirmer_fin">Confirmer le retour à l’atelier</string>
+
+    <!-- Avertissement de test (annexe 2.3, remarque 1) -->
+    <string name="avertissement_titre">Attention</string>
+    <string name="avertissement_jour">Attention dans la version finale de l’application, cette opération ne sera possible que le mercredi soir ou le jeudi matin. Souhaitez-vous continuer ?</string>
+    <string name="oui">Oui</string>
+    <string name="non">Non</string>
+
+    <!-- Saisie de la boucle -->
+    <string name="boucle_titre">Boucle de livraison</string>
+    <string name="boucle_sous_titre">Choisissez l’ordre des livraisons de la tournée</string>
+    <string name="mode_manuel">Manuelle</string>
+    <string name="mode_optimise">Optimisée</string>
+    <!-- Annexe 2.3 précision 2 : boucle proposée selon le poids, seuls les colis de poids égal sont permutables -->
+    <string name="boucle_aide_manuelle">Les colis sont livrés du plus léger (dessus de la pile) au plus lourd. Seuls les colis de même poids peuvent être permutés : faites-les glisser avec la poignée.</string>
+    <string name="boucle_proposee_titre">Boucle proposée selon le poids</string>
+    <string name="poids_identique">Poids identique</string>
+    <string name="btn_reinitialiser_boucle">Rétablir l’ordre proposé</string>
+    <string name="algo_titre">Algorithme d’optimisation</string>
+    <string name="algo_exact_titre">Résolution exacte</string>
+    <string name="algo_exact_desc">Algorithme exact développé par l’équipe</string>
+    <string name="algo_lib_titre">Résolution exacte (bibliothèque)</string>
+    <string name="algo_lib_desc">Solveur existant et maintenu</string>
+    <string name="algo_approche_titre">Résolution approchée</string>
+    <string name="algo_approche_desc">Heuristique rapide, proche de l’optimum</string>
+    <string name="btn_calculer">Calculer sur le serveur</string>
+    <string name="calcul_en_cours">Calcul en cours sur le serveur…</string>
+    <string name="resultat_titre">Résultat du calcul</string>
+    <string name="distance">Distance</string>
+    <string name="duree">Durée</string>
+    <string name="temps_calcul">Calcul</string>
+    <string name="btn_valider_boucle">Valider la boucle</string>
+
+    <!-- Colis et pièces -->
+    <string name="colis_sur_titre">Chargement du jour</string>
+    <string name="ordre_controle">Ordre contrôlé</string>
+    <string name="ordre_controle_aide">Les colis sont chargés par masse décroissante : les plus lourds en bas.</string>
+    <string name="client">Client</string>
+    <string name="pieces_emballees">Pièces emballées</string>
+    <string name="btn_voir_carte">Voir sur la carte</string>
+    <string name="piece">Pièce</string>
+    <string name="caracteristiques">Caractéristiques</string>
+    <string name="poids">Poids</string>
+    <string name="etat">État</string>
+    <string name="commande">Commande</string>
+    <string name="date_prevue">Date prévue</string>
+    <string name="adresse">Adresse</string>
+    <string name="contact">Contact</string>
+
+    <!-- Bons de livraison -->
+    <string name="bons_sur_titre">Bons de livraison</string>
+    <string name="bons_titre">Documents</string>
+    <string name="signature_aide_titre">Signature électronique</string>
+    <string name="signature_aide">Touchez un bon à signer pour faire valider la livraison par le client.</string>
+    <string name="statut_signe">Signé</string>
+    <string name="statut_a_signer">À signer</string>
+    <string name="statut_a_venir">À venir</string>
+    <string name="bon_titre">Bon de livraison</string>
+    <string name="colis_livres">Colis livrés</string>
+    <string name="recu_bon_etat">Colis reçus en bon état</string>
+    <string name="nom_signataire">Nom du signataire</string>
+    <string name="zone_signature">Signature du client</string>
+    <string name="btn_effacer">Effacer</string>
+    <string name="btn_valider_envoyer">Valider et envoyer</string>
+    <string name="statut_non_livre">Non livré</string>
+    <string name="statut_envoi_attente">Envoi en attente</string>
+    <string name="statut_envoye">Envoyé</string>
+
+    <!-- Colis non livré (annexe 2.3, remarque 2) -->
+    <string name="btn_non_livre">Colis non livré</string>
+    <string name="non_livre_titre">Colis non livré</string>
+    <string name="non_livre_sous_titre">Le colis reste dans le camion et sera déchargé au retour à l’atelier. Ses pièces seront notées comme non livrées.</string>
+    <string name="motif">Motif</string>
+    <string name="motif_absent">Client absent</string>
+    <string name="motif_refus">Colis refusé par le client</string>
+    <string name="motif_autre">Autre motif</string>
+    <string name="commentaire">Commentaire (facultatif)</string>
+    <string name="btn_confirmer_non_livre">Confirmer la non-livraison</string>
+    <string name="btn_annuler">Annuler</string>
+    <string name="autres_colis_client">Les autres colis de ce client restent livrables séparément.</string>
+
+    <!-- Résultat de l’envoi du bon (annexe 2.3 précision 6) -->
+    <string name="envoi_ok_titre">Bon de livraison envoyé</string>
+    <string name="envoi_ok_message">Le bon a bien été reçu par le serveur de l’atelier.</string>
+    <string name="envoi_echec_titre">Envoi impossible</string>
+    <string name="envoi_echec_pas_connexion">Pas de connexion réseau. Le bon est enregistré sur l’appareil et sera envoyé automatiquement au retour de la connexion.</string>
+    <string name="envoi_echec_serveur">Le serveur est indisponible. Le bon est enregistré sur l’appareil et sera renvoyé automatiquement.</string>
+    <string name="envoi_echec_autre">Une erreur est survenue lors de l’envoi. Le bon est conservé sur l’appareil.</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_reessayer_envoi">Réessayer maintenant</string>
+
+    <!-- Plus -->
+    <string name="preferences">PRÉFÉRENCES</string>
+    <string name="assistance">ASSISTANCE</string>
+    <string name="opt_carte_titre">Carte</string>
+    <string name="opt_carte_desc">OpenStreetMap</string>
+    <string name="opt_historique_titre">Historique</string>
+    <string name="opt_historique_desc">Tournées terminées</string>
+    <string name="opt_synchro_titre">Synchronisation</string>
+    <string name="opt_synchro_desc">Données à jour</string>
+    <string name="opt_guide_titre">Guide du chauffeur</string>
+    <string name="opt_guide_desc">Consignes de livraison</string>
+    <string name="opt_contact_titre">Contacter l’atelier</string>
+    <string name="opt_contact_desc">03 88 24 17 60</string>
+    <string name="version">T.G.V Livraison · version 1.0.0</string>
+    <string name="opt_deconnexion">Se déconnecter</string>
+
+    <!-- Connexion du livreur (annexe 2.3 précision 1) -->
+    <string name="connexion_sur_titre">Espace chauffeur</string>
+    <string name="connexion_titre">Connexion</string>
+    <string name="connexion_sous_titre">Identifiez-vous pour accéder à votre tournée du jour.</string>
+    <string name="identifiant">Identifiant</string>
+    <string name="mot_de_passe">Mot de passe</string>
+    <string name="se_souvenir">Se souvenir de moi</string>
+    <string name="btn_connexion">Se connecter</string>
+    <string name="connexion_en_cours">Connexion en cours…</string>
+    <string name="connexion_aide">Identifiants oubliés ? Contactez l’atelier au 03 88 24 17 60.</string>
+
+    <!-- Connexion réseau (annexe 2.3, remarque 3) -->
+    <string name="hors_ligne_titre">Hors connexion</string>
+    <string name="hors_ligne_message">Les opérations sont enregistrées et seront synchronisées au retour du réseau.</string>
+    <string name="operations_en_attente">%1$d en attente</string>
+
+    <!-- États de chargement / erreur (appels API via Volley) -->
+    <string name="etat_chargement">Chargement des données…</string>
+    <string name="btn_reessayer">Réessayer</string>
+</resources>

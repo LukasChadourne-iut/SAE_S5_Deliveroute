@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Palette reprise des maquettes T.G.V -->
+<resources>
+    <color name="fond">#F4F6F4</color>
+    <color name="blanc">#FFFFFF</color>
+    <color name="texte">#17251F</color>
+    <color name="texte_secondaire">#7A867F</color>
+    <color name="texte_clair">#A2B5AB</color>
+    <color name="vert_fonce">#163326</color>
+    <color name="vert_pastille">#29483A</color>
+    <color name="citron">#D8FF52</color>
+    <color name="vert_texte">#3E6D56</color>
+    <color name="vert_tres_clair">#E8F3EC</color>
+    <color name="vert_statut">#39745A</color>
+    <color name="vert_statut_fond">#E7F4EB</color>
+    <color name="bleu_statut">#3E6A9C</color>
+    <color name="bleu_statut_fond">#E6EEF8</color>
+    <color name="orange_texte">#825F26</color>
+    <color name="orange_clair">#F8EFDF</color>
+    <color name="rouge_erreur">#B3402F</color>
+    <color name="rouge_fond">#F9E7E3</color>
+    <color name="gris_statut">#77827C</color>
+    <color name="gris_statut_fond">#EEF0EE</color>
+    <color name="gris_bordure">#E0E5E1</color>
+    <color name="gris_fond_carte">#FAFBFA</color>
+    <color name="gris_icone">#9CA59F</color>
+
+    <!-- Valeurs reprises de la maquette (src/index.css) -->
+    <color name="avatar_fond">#1F3A2E</color>
+    <color name="avatar_texte">#DBE7E0</color>
+    <color name="options_tournee">#80978C</color>
+    <color name="piste_progression">#345044</color>
+    <color name="numero_fond">#294C3C</color>
+    <color name="arret_contour">#D7DDD8</color>
+    <color name="arret_texte">#7B8981</color>
+    <color name="arret_livre">#345D49</color>
+    <color name="arret_livre_texte">#4D7A64</color>
+    <color name="arret_prochain">#183B2B</color>
+    <color name="arret_trait">#C9D0CB</color>
+    <color name="bordure_active">#B9C8C0</color>
+    <color name="gris_separateur">#EDF0ED</color>
+    <color name="onglet_inactif">#89958F</color>
+    <color name="onglet_actif">#183126</color>
+    <color name="onglet_indicateur">#1B3C2D</color>
+    <color name="onglet_ligne">#E4E8E4</color>
+    <color name="surtitre">#7E8D85</color>
+    <color name="icone_option_fond">#EDF3EF</color>
+    <color name="icone_option">#486B5A</color>
+    <color name="synchro_ok">#6DB88D</color>
+    <color name="nav_actif">#1F4835</color>
+    <color name="nav_inactif">#95A098</color>
+    <color name="nav_bordure">#E1E6E2</color>
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logo T.G.V (maquette .logo-mark) : carré citron arrondi (rayon 9 sur 36),
+     trois barres vert foncé de hauteur croissante (12 / 18 / 23), alignées en bas,
+     inclinées par skewY(-28°) : décalage vertical de ±1,6 sur la largeur d’une barre. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="36dp"
+    android:height="36dp"
+    android:viewportWidth="36"
+    android:viewportHeight="36">
+    <path
+        android:fillColor="#FFD8FF52"
+        android:pathData="M0,9a9,9 0 0,1 9,-9h18a9,9 0 0,1 9,9v18a9,9 0 0,1 -9,9h-18a9,9 0 0,1 -9,-9z" />
+    <path
+        android:fillColor="#FF153025"
+        android:pathData="M6,18.6L12,15.4L12,27.4L6,30.6Z M15,12.6L21,9.4L21,27.4L15,30.6Z M24,7.6L30,4.4L30,27.4L24,30.6Z" />
+</vector>

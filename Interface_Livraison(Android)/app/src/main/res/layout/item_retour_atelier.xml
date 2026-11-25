@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Dernière étape de la boucle : retour à l’atelier (annexe 2.3, précisions 4 et 5).
+     Second type de vue du RecyclerView rvTournee (après les item_arret).
+     tvDetailRetour : retour_atelier_fin, ou retour_atelier_detail s’il reste des colis
+     non livrés à décharger (tvColisRetour visible avec leur nombre). -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <!-- Même piste que item_arret, sans trait (dernière étape) -->
+    <LinearLayout
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/ivRetourAtelier"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@drawable/bg_cercle"
+            android:backgroundTint="@color/vert_fonce"
+            android:importantForAccessibility="no"
+            android:padding="6dp"
+            android:src="@drawable/ic_camion"
+            app:tint="@color/citron" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvHeureRetour"
+            style="@style/Texte.Secondaire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            tools:text="11:20" />
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Carte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/vert_tres_clair"
+            app:strokeColor="@color/vert_tres_clair">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="12dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/Texte.Gras"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/retour_atelier"
+                        android:textColor="@color/vert_texte" />
+
+                    <TextView
+                        android:id="@+id/tvDetailRetour"
+                        style="@style/Texte.Secondaire"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/retour_atelier_fin"
+                        android:textColor="@color/vert_texte" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvColisRetour"
+                    style="@style/Badge"
+                    android:backgroundTint="@color/rouge_fond"
+                    android:textColor="@color/rouge_erreur"
+                    android:visibility="gone"
+                    tools:text="1 non livré"
+                    tools:visibility="visible" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</LinearLayout>

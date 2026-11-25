@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Un bon de livraison (un bon par colis). Couleurs du statut (à appliquer dans l’adapter) :
+     Signé     : vert_statut  / vert_statut_fond
+     À signer  : orange_texte / orange_clair
+     À venir   : gris_statut  / gris_statut_fond
+     Non livré : rouge_erreur / rouge_fond  (client absent / refus : aucun bon envoyé)
+     Ligne d’envoi (tvEnvoiBon, visible pour un bon signé) :
+     Envoyé           : ic_envoi, vert_statut
+     Envoi en attente : ic_hors_ligne, orange_texte (bon stocké localement, renvoyé au retour du réseau) -->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Carte"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:minHeight="66dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp">
+
+        <ImageView
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/bg_pastille"
+            android:backgroundTint="@color/vert_tres_clair"
+            android:importantForAccessibility="no"
+            android:padding="8dp"
+            android:src="@drawable/ic_document"
+            app:tint="@color/vert_texte" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvNumeroBon"
+                style="@style/Texte.Gras"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="BL-2026-0842" />
+
+            <TextView
+                android:id="@+id/tvInfoBon"
+                style="@style/Texte.Secondaire"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Nord Technique · Prochain arrêt" />
+
+            <TextView
+                android:id="@+id/tvEnvoiBon"
+                style="@style/Texte.Secondaire"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:drawablePadding="4dp"
+                android:gravity="center_vertical"
+                android:text="@string/statut_envoi_attente"
+                android:textColor="@color/orange_texte"
+                android:textSize="11sp"
+                android:visibility="gone"
+                app:drawableStartCompat="@drawable/ic_hors_ligne"
+                app:drawableTint="@color/orange_texte"
+                tools:visibility="visible" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvStatutBon"
+            style="@style/Badge"
+            android:backgroundTint="@color/orange_clair"
+            android:textColor="@color/orange_texte"
+            tools:text="@string/statut_a_signer" />
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="8dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_chevron"
+            app:tint="@color/gris_icone" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

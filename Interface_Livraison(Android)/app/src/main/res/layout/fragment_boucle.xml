@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Saisie de la boucle de livraison :
+     - mode Manuel : le chauffeur réordonne les arrêts (glisser-déposer, ItemTouchHelper)
+     - mode Optimisé : choix de l’algorithme + estimation de la difficulté, calcul sur le serveur -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp"
+                android:paddingBottom="12dp">
+
+                <TextView
+                    style="@style/Texte.GrandTitre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/boucle_titre" />
+
+                <TextView
+                    style="@style/Texte.Secondaire"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/boucle_sous_titre" />
+
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/toggleModeBoucle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:checkedButton="@id/btnModeOptimise"
+                    app:selectionRequired="true"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnModeManuel"
+                        style="@style/Bouton.Onglet"
+                        android:text="@string/mode_manuel" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnModeOptimise"
+                        style="@style/Bouton.Onglet"
+                        android:text="@string/mode_optimise" />
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+
+                <!-- ===== Mode manuel ===== -->
+                <LinearLayout
+                    android:id="@+id/groupeManuel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <TextView
+                        style="@style/Texte.Gras"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/boucle_proposee_titre" />
+
+                    <TextView
+                        style="@style/Texte.Secondaire"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/boucle_aide_manuelle" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvBoucleManuelle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:nestedScrollingEnabled="false"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="3"
+                        tools:listitem="@layout/item_arret_deplacable" />
+
+                    <TextView
+                        android:id="@+id/tvDistanceManuelle"
+                        style="@style/Texte.Gras"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:drawablePadding="6dp"
+                        android:gravity="center_vertical"
+                        app:drawableStartCompat="@drawable/ic_route"
+                        app:drawableTint="@color/vert_texte"
+                        tools:text="Distance estimée : 92 km" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnReinitialiserBoucle"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/btn_reinitialiser_boucle"
+                        android:textColor="@color/vert_texte" />
+                </LinearLayout>
+
+                <!-- ===== Mode optimisé ===== -->
+                <LinearLayout
+                    android:id="@+id/groupeOptimise"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:orientation="vertical">
+
+                    <!-- Taille du problème : m colis pour n clients -->
+                    <LinearLayout style="@style/Bandeau">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_colis"
+                            app:tint="@color/vert_texte" />
+
+                        <TextView
+                            android:id="@+id/tvTailleProbleme"
+                            style="@style/Texte.Gras"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:textColor="@color/vert_texte"
+                            tools:text="4 colis à livrer à 3 clients" />
+                    </LinearLayout>
+
+                    <TextView
+                        style="@style/Texte.Section"
+                        android:text="@string/algo_titre" />
+
+                    <!-- Exclusivité de la sélection gérée dans le Fragment (setChecked) -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/carteAlgoExact"
+                        style="@style/Carte.Selectionnable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:padding="14dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/Texte.Gras"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/algo_exact_titre" />
+
+                                <TextView
+                                    style="@style/Texte.Secondaire"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/algo_exact_desc" />
+
+                                <TextView
+                                    android:id="@+id/tvTempsAlgoExact"
+                                    style="@style/Texte.Secondaire"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    tools:text="Temps estimé : ~ 2 s" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvDifficulteAlgoExact"
+                                style="@style/Badge"
+                                android:layout_marginEnd="26dp"
+                                android:backgroundTint="@color/orange_clair"
+                                android:textColor="@color/orange_texte"
+                                tools:text="Moyenne" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/carteAlgoBibliotheque"
+                        style="@style/Carte.Selectionnable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:padding="14dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/Texte.Gras"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/algo_lib_titre" />
+
+                                <TextView
+                                    style="@style/Texte.Secondaire"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/algo_lib_desc" />
+
+                                <TextView
+                                    android:id="@+id/tvTempsAlgoBibliotheque"
+                                    style="@style/Texte.Secondaire"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    tools:text="Temps estimé : ~ 1 s" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvDifficulteAlgoBibliotheque"
+                                style="@style/Badge"
+                                android:layout_marginEnd="26dp"
+                                android:backgroundTint="@color/bleu_statut_fond"
+                                android:textColor="@color/bleu_statut"
+                                tools:text="Faible" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/carteAlgoApproche"
+                        style="@style/Carte.Selectionnable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:padding="14dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/Texte.Gras"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/algo_approche_titre" />
+
+                                <TextView
+                                    style="@style/Texte.Secondaire"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/algo_approche_desc" />
+
+                                <TextView
+                                    android:id="@+id/tvTempsAlgoApproche"
+                                    style="@style/Texte.Secondaire"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    tools:text="Temps estimé : &lt; 0,1 s" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvDifficulteAlgoApproche"
+                                style="@style/Badge"
+                                android:layout_marginEnd="26dp"
+                                android:backgroundTint="@color/vert_statut_fond"
+                                android:textColor="@color/vert_statut"
+                                tools:text="Très faible" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCalculer"
+                        style="@style/Bouton.Fonce"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="14dp"
+                        android:text="@string/btn_calculer"
+                        app:icon="@drawable/ic_parametres" />
+
+                    <!-- Calcul en cours (requête Volley vers l’API) -->
+                    <LinearLayout
+                        android:id="@+id/groupeCalculEnCours"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <com.google.android.material.progressindicator.CircularProgressIndicator
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:indeterminate="true"
+                            app:indicatorSize="22dp" />
+
+                        <TextView
+                            style="@style/Texte.Secondaire"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/calcul_en_cours" />
+                    </LinearLayout>
+
+                    <!-- Résultat du calcul renvoyé par le serveur -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/carteResultat"
+                        style="@style/Carte"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="14dp">
+
+                            <TextView
+                                style="@style/Texte.Gras"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/resultat_titre" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/tvResultatDistance"
+                                        style="@style/Texte.Valeur"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        tools:text="86 km" />
+
+                                    <TextView
+                                        style="@style/Texte.Secondaire"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/distance" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/tvResultatDuree"
+                                        style="@style/Texte.Valeur"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        tools:text="3 h 20" />
+
+                                    <TextView
+                                        style="@style/Texte.Secondaire"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/duree" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/tvResultatTempsCalcul"
+                                        style="@style/Texte.Valeur"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        tools:text="0,8 s" />
+
+                                    <TextView
+                                        style="@style/Texte.Secondaire"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/temps_calcul" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvResultatGain"
+                                style="@style/Badge"
+                                android:layout_marginTop="10dp"
+                                android:backgroundTint="@color/vert_statut_fond"
+                                android:textColor="@color/vert_statut"
+                                tools:text="Gain estimé : 6 km par rapport à la boucle manuelle" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnValiderBoucle"
+            style="@style/Bouton.Principal"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="10dp"
+            android:text="@string/btn_valider_boucle"
+            app:icon="@drawable/ic_coche" />
+    </LinearLayout>
+
+    <include layout="@layout/view_etat_chargement" />
+
+</FrameLayout>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authentification du livreur (annexe 2.3, précision 1).
+     Activité lancée avant MainActivity : pas d’en-tête ni de barre de navigation.
+     Erreurs de saisie : tilIdentifiant / tilMotDePasse.setError(...)
+     Erreur serveur / réseau : tvErreurConnexion visible. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fond"
+    tools:context=".ui.ConnexionActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="32dp">
+
+            <!-- Logo + nom de l’entreprise -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:contentDescription="@string/cd_logo"
+                    android:src="@drawable/ic_logo_tgv" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/Texte.Titre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nom_entreprise" />
+
+                    <TextView
+                        style="@style/Texte.Secondaire"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nom_entreprise_complet" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                style="@style/Texte.SurTitre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="@string/connexion_sur_titre" />
+
+            <TextView
+                style="@style/Texte.GrandTitre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/connexion_titre" />
+
+            <TextView
+                style="@style/Texte.Secondaire"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/connexion_sous_titre"
+                android:textSize="13sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilIdentifiant"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:hint="@string/identifiant"
+                app:boxBackgroundColor="@color/blanc"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxStrokeColor="@color/vert_fonce"
+                app:startIconDrawable="@drawable/ic_utilisateur"
+                app:startIconTint="@color/vert_texte">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etIdentifiant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="username"
+                    android:imeOptions="actionNext"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilMotDePasse"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:hint="@string/mot_de_passe"
+                app:boxBackgroundColor="@color/blanc"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxStrokeColor="@color/vert_fonce"
+                app:endIconMode="password_toggle"
+                app:startIconDrawable="@drawable/ic_cadenas"
+                app:startIconTint="@color/vert_texte">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMotDePasse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="password"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cbSeSouvenir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/se_souvenir"
+                app:buttonTint="@color/vert_fonce" />
+
+            <!-- Erreur renvoyée par l’API (identifiants invalides, serveur indisponible, pas de réseau) -->
+            <LinearLayout
+                android:id="@+id/bandeauErreurConnexion"
+                style="@style/Bandeau"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/rouge_fond"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_alerte"
+                    app:tint="@color/rouge_erreur" />
+
+                <TextView
+                    android:id="@+id/tvErreurConnexion"
+                    style="@style/Texte"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/rouge_erreur"
+                    android:textSize="13sp"
+                    tools:text="Identifiant ou mot de passe incorrect." />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnConnexion"
+                style="@style/Bouton.Principal"
+                android:layout_width="match_parent"
+                android:layout_marginTop="16dp"
+                android:text="@string/btn_connexion" />
+
+            <!-- Requête Volley en cours -->
+            <LinearLayout
+                android:id="@+id/groupeConnexionEnCours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    app:indicatorColor="@color/vert_fonce"
+                    app:indicatorSize="20dp" />
+
+                <TextView
+                    style="@style/Texte.Secondaire"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/connexion_en_cours" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/Texte.Secondaire"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:text="@string/connexion_aide" />
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

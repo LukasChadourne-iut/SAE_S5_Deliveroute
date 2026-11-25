@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fin de tournée / retour à l’atelier (annexe 2.3, précisions 4 et 6) :
+     récapitulatif livrés / non livrés, ordre réel des points de livraison (+ retour atelier)
+     communiqué à l’atelier, bons encore en attente d’envoi (mode hors connexion).
+     rvOrdrePoints réutilise item_arret (lecture seule) puis item_retour_atelier. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp"
+                android:paddingBottom="12dp">
+
+                <TextView
+                    android:id="@+id/tvNomTourneeFin"
+                    style="@style/Texte.SurTitre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Tournée #124" />
+
+                <TextView
+                    style="@style/Texte.GrandTitre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fin_tournee_titre" />
+
+                <TextView
+                    style="@style/Texte.Secondaire"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fin_tournee_sous_titre" />
+
+                <!-- Compteurs -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        style="@style/Carte"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:id="@+id/tvNbLivres"
+                                style="@style/Texte.Valeur"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/vert_statut"
+                                tools:text="3" />
+
+                            <TextView
+                                style="@style/Texte.Secondaire"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/fin_colis_livres" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        style="@style/Carte"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:id="@+id/tvNbNonLivres"
+                                style="@style/Texte.Valeur"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/rouge_erreur"
+                                tools:text="1" />
+
+                            <TextView
+                                style="@style/Texte.Secondaire"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/fin_colis_non_livres" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        style="@style/Carte"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:id="@+id/tvNbBonsAttente"
+                                style="@style/Texte.Valeur"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/orange_texte"
+                                tools:text="0" />
+
+                            <TextView
+                                style="@style/Texte.Secondaire"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/fin_bons_en_attente" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <!-- Visible s’il reste des bons non transmis -->
+                <LinearLayout
+                    android:id="@+id/bandeauBonsAttente"
+                    style="@style/Bandeau"
+                    android:layout_marginTop="12dp"
+                    android:backgroundTint="@color/orange_clair"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_hors_ligne"
+                        app:tint="@color/orange_texte" />
+
+                    <TextView
+                        style="@style/Texte.Secondaire"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:text="@string/fin_bons_attente_aide"
+                        android:textColor="@color/orange_texte" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/Texte.Section"
+                    android:text="@string/ordre_points" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvOrdrePoints"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_arret" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnConfirmerFinTournee"
+            style="@style/Bouton.Principal"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="10dp"
+            android:text="@string/btn_confirmer_fin"
+            app:icon="@drawable/ic_camion" />
+    </LinearLayout>
+
+    <include layout="@layout/view_etat_chargement" />
+
+</FrameLayout>

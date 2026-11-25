@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Un colis de la boucle manuelle (annexe 2.3, précision 2).
+     Une ligne par colis (et non par client) : un même client peut être livré plusieurs fois
+     dans la boucle (annexe 2.1 §4).
+     L’ordre proposé suit le poids (du plus léger, dessus de la pile, au plus lourd).
+     Seuls les colis de poids identique sont permutables :
+       - tvPoidsIdentique et ivPoignee visibles uniquement pour ces colis ;
+       - l’ItemTouchHelper refuse tout déplacement hors du groupe de même poids. -->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Carte"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:minHeight="64dp"
+        android:paddingVertical="8dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="4dp">
+
+        <TextView
+            android:id="@+id/tvOrdreArret"
+            style="@style/Numero"
+            tools:text="1" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvEntrepriseArret"
+                style="@style/Texte.Gras"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Nord Technique" />
+
+            <TextView
+                android:id="@+id/tvVilleArret"
+                style="@style/Texte.Secondaire"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="COL-044 · Brumath" />
+
+            <TextView
+                android:id="@+id/tvPoidsIdentique"
+                style="@style/Badge"
+                android:layout_marginTop="4dp"
+                android:backgroundTint="@color/bleu_statut_fond"
+                android:text="@string/poids_identique"
+                android:textColor="@color/bleu_statut"
+                android:visibility="gone"
+                tools:visibility="visible" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvPoidsArret"
+            style="@style/Texte.Gras"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            tools:text="185 kg" />
+
+        <!-- Poignée de glisser-déposer : invisible (place conservée) si le colis n’est pas permutable -->
+        <ImageView
+            android:id="@+id/ivPoignee"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="@string/cd_deplacer"
+            android:padding="12dp"
+            android:src="@drawable/ic_deplacer"
+            android:visibility="invisible"
+            app:tint="@color/gris_icone"
+            tools:visibility="visible" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

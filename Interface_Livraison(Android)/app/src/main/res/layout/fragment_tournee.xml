@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Écran « Tournée » (téléphone) : résumé, carte OpenStreetMap, itinéraire / ordre de chargement -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp"
+                android:paddingBottom="12dp">
+
+                <include layout="@layout/view_resume_tournee" />
+
+                <!-- Carte OpenStreetMap (osmdroid) : points de livraison et étapes de la boucle -->
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/Carte"
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp"
+                    android:layout_marginTop="12dp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <org.osmdroid.views.MapView
+                            android:id="@+id/mapTournee"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/cd_carte" />
+
+                        <TextView
+                            android:id="@+id/tvAlgoUtilise"
+                            style="@style/Badge"
+                            android:layout_gravity="top|end"
+                            android:layout_margin="10dp"
+                            android:backgroundTint="@color/citron"
+                            android:text="@string/trajet_optimise"
+                            android:textColor="@color/vert_fonce" />
+
+                        <!-- Position du camion en temps réel (MyLocationNewOverlay), sans guidage GPS -->
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/fabMaPosition"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|end"
+                            android:layout_margin="10dp"
+                            android:contentDescription="@string/cd_ma_position"
+                            android:src="@drawable/ic_ma_position"
+                            app:backgroundTint="@color/blanc"
+                            app:fabSize="mini"
+                            app:tint="@color/vert_fonce" />
+                    </FrameLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Onglets Itinéraire / Chargement, soulignés (maquette .mobile-tabs).
+                     Sélection : tabOnglets.addOnTabSelectedListener (position 0 = Itinéraire, 1 = Chargement). -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="bottom"
+                        android:background="@color/onglet_ligne" />
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tabOnglets"
+                        style="@style/Onglets"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp">
+
+                        <com.google.android.material.tabs.TabItem
+                            android:id="@+id/ongletItineraire"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/onglet_itineraire" />
+
+                        <com.google.android.material.tabs.TabItem
+                            android:id="@+id/ongletChargement"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/onglet_chargement" />
+                    </com.google.android.material.tabs.TabLayout>
+                </FrameLayout>
+
+                <!-- Bandeau visible uniquement dans l’onglet Chargement -->
+                <LinearLayout
+                    android:id="@+id/bandeauChargement"
+                    style="@style/Bandeau"
+                    android:layout_marginTop="12dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_boite"
+                        app:tint="@color/vert_texte" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/Texte.Gras"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/chargement_titre"
+                            android:textColor="@color/vert_texte" />
+
+                        <TextView
+                            style="@style/Texte.Secondaire"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/chargement_aide"
+                            android:textColor="@color/vert_texte" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Liste : item_arret (+ item_retour_atelier en dernière position) pour l’Itinéraire,
+                     item_chargement pour le Chargement -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvTournee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_arret" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/fond"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSaisirBoucle"
+                style="@style/Bouton.Secondaire"
+                android:layout_width="0dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="@string/btn_saisir_boucle" />
+
+            <!-- Texte : btn_navigation avant le départ, btn_terminer_tournee pendant la tournée
+                 (ouvre fragment_fin_tournee). Précédé du popup avertissement_jour. -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNavigation"
+                style="@style/Bouton.Principal"
+                android:layout_width="0dp"
+                android:layout_weight="1.3"
+                android:text="@string/btn_navigation"
+                app:icon="@drawable/ic_route" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/view_etat_chargement" />
+
+</FrameLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_tournee"
+        android:icon="@drawable/ic_route"
+        android:title="@string/nav_tournee" />
+    <item
+        android:id="@+id/nav_colis"
+        android:icon="@drawable/ic_colis"
+        android:title="@string/nav_colis" />
+    <item
+        android:id="@+id/nav_bons"
+        android:icon="@drawable/ic_document"
+        android:title="@string/nav_bons" />
+    <item
+        android:id="@+id/nav_plus"
+        android:icon="@drawable/ic_parametres"
+        android:title="@string/nav_plus" />
+</menu>
