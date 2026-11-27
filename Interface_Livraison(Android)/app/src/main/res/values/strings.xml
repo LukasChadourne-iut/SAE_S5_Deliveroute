@@ -162,6 +162,7 @@
     <string name="mot_de_passe">Mot de passe</string>
     <string name="se_souvenir">Se souvenir de moi</string>
     <string name="btn_connexion">Se connecter</string>
+    <string name="champ_obligatoire">Champ obligatoire</string>
     <string name="connexion_en_cours">Connexion en cours…</string>
     <string name="connexion_aide">Identifiants oubliés ? Contactez l’atelier au 03 88 24 17 60.</string>
 

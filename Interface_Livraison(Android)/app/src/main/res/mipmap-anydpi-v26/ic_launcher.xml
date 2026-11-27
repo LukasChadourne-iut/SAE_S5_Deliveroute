@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Icône adaptative (minSdk 26) : fond vert foncé, logo T.G.V au premier plan -->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@color/vert_fonce" />
+    <foreground android:drawable="@drawable/ic_launcher_premier_plan" />
+    <monochrome android:drawable="@drawable/ic_launcher_premier_plan" />
+</adaptive-icon>
